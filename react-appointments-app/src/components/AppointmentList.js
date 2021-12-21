@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useCallback } from "react";
+import AppointmentAddOrUpdate from "./AppointmentAddOrUpdate";
 
 function SearchBox({ query, onQueryChange, sortBy, onSortByChange, orderBy, onOrderByChange }) {
     const [toggleSort, setToggleSort] = useState(false)
 
     return (
-
         <div className="input-group my-2">
             <input type="text" className="form-control" id="q" placeholder="Search"
                 value={query}
@@ -42,7 +42,7 @@ function AppointmentInfo({ appointment, onDeleteAppointment }) {
                 <p>Pet Name : {appointment.petName}</p>
                 <p>Owner Name : {appointment.ownerName}</p>
                 <p>Notes : <br /> {appointment.aptNotes}</p>
-                <p>Appointment Date : {appointment.apDate}</p>
+                <p>Appointment Date : {appointment.aptDate}</p>
 
                 <input type="button" className="btn btn-danger push-left" value="delete" onClick={() => { onDeleteAppointment(appointment.id) }} />
             </div>
@@ -80,8 +80,18 @@ function AppointmentList() {
         return (a[sortBy] > b[sortBy] ? 1 : -1) * order;
     })
 
+    const SaveAppointment= (appointment)=>{
+        const ids = appointments.map((x)=> {
+            return x.id
+        });
+        const max = Math.max(...ids);
+        appointment.id = max+1;
+        appointments.push(appointment);
+    }
+
     return (
         <div className="container">
+            <AppointmentAddOrUpdate onSaveAppointment={(x) => { SaveAppointment(x) }} />
             <div className="searchbox">
                 <SearchBox
                     query={query}
