@@ -1,0 +1,25 @@
+{
+  "name": "nodejs-essentials",
+  "version": "1.0.0",
+  "main": "src/index.js",
+  "author": "Vinay Awasthi",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "babel-node": "babel-node --presets='@babel/preset-env'",
+    "start": "nodemon --exec babel-node src/index.js"
+  },
+  "dependencies": {
+    "body-parser": "^1.19.1",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.2",
+    "mongodb": "^4.2.2"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.16.0",
+    "@babel/core": "^7.16.5",
+    "@babel/node": "^7.16.5",
+    "@babel/preset-env": "^7.16.5",
+    "nodemon": "^2.0.15"
+  }
+}
