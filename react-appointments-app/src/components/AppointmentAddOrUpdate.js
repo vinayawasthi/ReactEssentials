@@ -12,23 +12,23 @@ function AppointmentAddOrUpdate({ onSaveAppointment }) {
 
     const changeHandle = (e) => {
         e.preventDefault();
-        if (e.target.name == "petName") {
+        if (e.target.name === "petName") {
             const petName = e.target.value;
             appointment.petName=e.target.value;
         }
-        else if (e.target.name == "ownerName") {
+        else if (e.target.name === "ownerName") {
             const ownerName = e.target.value;
             appointment.ownerName=ownerName;
         }
-        else if (e.target.name == "aptDate") {
+        else if (e.target.name === "aptDate") {
             const aptDate = e.target.value;
             appointment.aptDate=aptDate;
         }
-        else if (e.target.name == "aptTime") {
+        else if (e.target.name === "aptTime") {
             const aptTime = e.target.value;
             appointment.aptTime= aptTime;
         }
-        else if (e.target.name == "aptNotes") {
+        else if (e.target.name === "aptNotes") {
             const aptNotes = e.target.value;
             appointment.aptNotes=aptNotes;
         }

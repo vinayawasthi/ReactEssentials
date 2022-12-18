@@ -1,54 +1,7 @@
 import React, { useState, useEffect, useCallback } from "react";
 import AppointmentAddOrUpdate from "./AppointmentAddOrUpdate";
-
-function SearchBox({ query, onQueryChange, sortBy, onSortByChange, orderBy, onOrderByChange }) {
-    const [toggleSort, setToggleSort] = useState(false)
-
-    return (
-        <div className="input-group my-2">
-            <input type="text" className="form-control" id="q" placeholder="Search"
-                value={query}
-                onChange={(e) => { onQueryChange(e.target.value) }} />
-            <div className={toggleSort ? "btn-group show" : "btn-group"} role="group">
-                <button id="btnSortBy" type="button"
-                    className="btn btn-primary dropdown-toggle"
-                    data-toggle="dropdown"
-                    aria-haspopup="false"
-                    aria-expanded={toggleSort ? "true" : "false"}
-                    onClick={() => { setToggleSort(!toggleSort); console.log(toggleSort); }}
-                >Sort By</button>
-                <div className={toggleSort ? "dropdown-menu show" : "dropdown-menu"} aria-labelledby="btnSortBy">
-                    <a className="dropdown-item" href="#"
-                        onClick={(e) => { onSortByChange("petName") }}>Pet Name {sortBy == "petName" ? "*" : ""}</a>
-                    <a className="dropdown-item" href="#"
-                        onClick={(e) => { onSortByChange("ownerName") }}>Owner Name {sortBy == "ownerName" ? "*" : ""}</a>
-                    <a className="dropdown-item" href="#"
-                        onClick={(e) => { onSortByChange("aptDate") }}>Date {sortBy == "aptDate" ? "*" : ""}</a>
-
-                    <a className="dropdown-item" href="#"
-                        onClick={(e) => { onOrderByChange("asc") }}>Order By : ASC {orderBy == "asc" ? "*" : ""}</a>
-                    <a className="dropdown-item" href="#"
-                        onClick={(e) => { onOrderByChange("desc") }}>Order By : DESC {orderBy == "desc" ? "*" : ""}</a>
-                </div>
-            </div>
-        </div>
-    )
-}
-
-function AppointmentInfo({ appointment, onDeleteAppointment }) {
-    return (
-        <div className="item card mb-3" key={appointment.id}>
-            <div className="card-body text-primary">
-                <p>Pet Name : {appointment.petName}</p>
-                <p>Owner Name : {appointment.ownerName}</p>
-                <p>Notes : <br /> {appointment.aptNotes}</p>
-                <p>Appointment Date : {appointment.aptDate}</p>
-
-                <input type="button" className="btn btn-danger push-left" value="delete" onClick={() => { onDeleteAppointment(appointment.id) }} />
-            </div>
-        </div>
-    )
-}
+import AppointmentInfo from './AppointmentInfo';
+import AppointmentSearchBox  from './AppointmentSearchBox';
 
 function AppointmentList() {
     let [appointments, setAppointments] = useState([])
@@ -93,7 +46,7 @@ function AppointmentList() {
         <div className="container">
             <AppointmentAddOrUpdate onSaveAppointment={(x) => { SaveAppointment(x) }} />
             <div className="searchbox">
-                <SearchBox
+                <AppointmentSearchBox
                     query={query}
                     onQueryChange={(query) => { SetQuery(query) }}
                     sortBy={sortBy}
