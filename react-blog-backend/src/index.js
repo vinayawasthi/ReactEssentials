@@ -14,32 +14,15 @@ const host = process.env.HOST || "localhost"
 const withDB = async (operations, res) => {
   const client = MongoClient.connect(process.env.MONGODB_URL, { useNewUrlParser: true });
   client.then(async (x) => {
-    console.log("in try");
-    //x.connect();
     const db = x.db('blog');
     await operations(db);
   }).catch((error) => {
-    console.log("in catch");
     console.log(error);
     res.status(500).json({ message: 'Error connecting to db', error });
   }).finally(() => {
-    console.log("in finally");
     client.then((x) => x.close());
   });
 }
-
-// const withDB = async (operations, res) => {
-//   try {
-//     const client = await MongoClient.connect(process.env.MONGODB_URL, { useNewUrlParser: true });
-//     const db = client.db('blog');
-
-//     await operations(db);
-
-//     client.close();
-//   } catch (error) {
-//     res.status(500).json({ message: 'Error connecting to db', error });
-//   }
-// }
 
 const app = express()
 //app.use(express.static(path.join(__dirname, '/public')));
